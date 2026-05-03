@@ -6,3 +6,22 @@ node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+# Dependencies
+node_modules/
+
+# Hexo generated files
+public/
+.deploy_git/
+db.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
