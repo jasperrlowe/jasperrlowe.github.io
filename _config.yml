@@ -103,5 +103,5 @@ theme: landscape
 
 deploy:
   type: git
-  repo: https://github.com/Jerry0310no1/Jerry0310no1.github.io.git
+  repo: git@github.com:Jerry0310no1/Jerry0310no1.github.io.git
   branch: main
