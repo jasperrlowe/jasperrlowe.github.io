@@ -4,28 +4,23 @@
   <meta charset="utf-8">
   
   
-  <title>全人助手 MVP：从&#34;培养方案 PDF&#34;到 AI 驱动的学业规划（可行性验证） | JerryL&#39;s Journey of CS</title>
+  <title>全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划 | JerryL&#39;s Journey of CS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="TL;DR: 用 3 周时间完成了”全人助手”的第一个可用原型（MVP），验证了”用 AI 整合培养方案 PDF 做学业规划”的可行性。核心特性：Hybrid Context（本地 PDF + 内置权威资料）、Smart Routing（Flash 快速查询 + Pro 深度规划）、Orbit UI（行星轨道式交互）。227 行 Flask 后端 + 1189 行原生 JS 前端，无需数据库，支持">
+  <meta name="description" content="TL;DR: 花了 3 周做出”全人助手”的第一个可用版本，验证了用 AI 整合培养方案 PDF 来做学业规划这件事是可行的。227 行 Flask 后端 + 1189 行原生 JS 前端，支持 36 个专业的课程查询。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="全人助手 MVP：从&quot;培养方案 PDF&quot;到 AI 驱动的学业规划（可行性验证）">
+<meta property="og:title" content="全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划">
 <meta property="og:url" content="https://jerry0310no1.github.io/2025/11/20/holistic-assistant-mvp/index.html">
 <meta property="og:site_name" content="JerryL&#39;s Journey of CS">
-<meta property="og:description" content="TL;DR: 用 3 周时间完成了”全人助手”的第一个可用原型（MVP），验证了”用 AI 整合培养方案 PDF 做学业规划”的可行性。核心特性：Hybrid Context（本地 PDF + 内置权威资料）、Smart Routing（Flash 快速查询 + Pro 深度规划）、Orbit UI（行星轨道式交互）。227 行 Flask 后端 + 1189 行原生 JS 前端，无需数据库，支持">
+<meta property="og:description" content="TL;DR: 花了 3 周做出”全人助手”的第一个可用版本，验证了用 AI 整合培养方案 PDF 来做学业规划这件事是可行的。227 行 Flask 后端 + 1189 行原生 JS 前端，支持 36 个专业的课程查询。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://jerry0310no1.github.io/images/mvp-orbit-home.png">
-<meta property="og:image" content="https://jerry0310no1.github.io/images/mvp-chat-interface.png">
-<meta property="og:image" content="https://jerry0310no1.github.io/images/mvp-plan-generator.png">
 <meta property="article:published_time" content="2025-11-20T04:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-23T17:23:59.161Z">
+<meta property="article:modified_time" content="2026-05-19T07:09:29.453Z">
 <meta property="article:author" content="JiaRUI Lou">
 <meta property="article:tag" content="Flask">
 <meta property="article:tag" content="Gemini">
 <meta property="article:tag" content="Holistic Assistant">
 <meta property="article:tag" content="MVP">
-<meta property="article:tag" content="Prototype">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jerry0310no1.github.io/images/mvp-orbit-home.png">
   
     <link rel="alternate" href="/atom.xml" title="JerryL's Journey of CS" type="application/atom+xml">
   
@@ -95,7 +90,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Projects/">Projects</a>
+    <a class="article-category-link" href="/categories/Holistic-Assistant/">Holistic Assistant</a>
   </div>
 
   </div>
@@ -106,7 +101,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      全人助手 MVP：从&#34;培养方案 PDF&#34;到 AI 驱动的学业规划（可行性验证）
+      全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划
     </h1>
   
 
@@ -114,382 +109,212 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p><strong>TL;DR</strong>: 用 3 周时间完成了”全人助手”的第一个可用原型（MVP），验证了”用 AI 整合培养方案 PDF 做学业规划”的可行性。核心特性：<strong>Hybrid Context</strong>（本地 PDF + 内置权威资料）、<strong>Smart Routing</strong>（Flash 快速查询 + Pro 深度规划）、<strong>Orbit UI</strong>（行星轨道式交互）。227 行 Flask 后端 + 1189 行原生 JS 前端，无需数据库，支持 36 个专业的培养方案查询。</p>
+        <p><strong>TL;DR</strong>: 花了 3 周做出”全人助手”的第一个可用版本，验证了用 AI 整合培养方案 PDF 来做学业规划这件事是可行的。227 行 Flask 后端 + 1189 行原生 JS 前端，支持 36 个专业的课程查询。</p>
 <span id="more"></span>
 
 <hr>
-<h2 id="🎯-MVP-目标：验证核心假设"><a href="#🎯-MVP-目标：验证核心假设" class="headerlink" title="🎯 MVP 目标：验证核心假设"></a>🎯 MVP 目标：验证核心假设</h2><h3 id="要回答的关键问题"><a href="#要回答的关键问题" class="headerlink" title="要回答的关键问题"></a>要回答的关键问题</h3><ol>
-<li><strong>需求假设</strong>：学生真的需要一个”整合培养方案 + AI 问答”的工具吗？</li>
-<li><strong>技术假设</strong>：Gemini 能不能理解中文培养方案 PDF 并给出靠谱建议？</li>
-<li><strong>成本假设</strong>：能不能在不爬 SIS、不建数据库的情况下做出可用系统？</li>
+<h2 id="🎯-MVP-要验证什么"><a href="#🎯-MVP-要验证什么" class="headerlink" title="🎯 MVP 要验证什么"></a>🎯 MVP 要验证什么</h2><p>做之前有三个核心问题：</p>
+<ol>
+<li>学生真的需要这样一个工具吗？</li>
+<li>Gemini 能理解中文培养方案 PDF 并给出靠谱回答吗？</li>
+<li>不爬 SIS、不建数据库，能不能做出可用的东西？</li>
 </ol>
-<h3 id="MVP-的”取舍哲学”"><a href="#MVP-的”取舍哲学”" class="headerlink" title="MVP 的”取舍哲学”"></a>MVP 的”取舍哲学”</h3><table>
+<h3 id="做了什么、没做什么"><a href="#做了什么、没做什么" class="headerlink" title="做了什么、没做什么"></a>做了什么、没做什么</h3><table>
 <thead>
 <tr>
 <th>完整版想法</th>
-<th>MVP 实现</th>
-<th>原因</th>
+<th>MVP 做法</th>
+<th>为什么</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>爬取 SIS 实时开课数据</td>
-<td>❌ 只用培养方案 PDF</td>
-<td>先验证”AI 能不能理解 PDF”，再考虑爬虫</td>
+<td>爬 SIS 实时数据</td>
+<td>❌ 只用 PDF</td>
+<td>先验证 AI 能不能理解 PDF</td>
 </tr>
 <tr>
-<td>用 Vector DB 做语义检索</td>
-<td>❌ 直接读 PDF + 内置模板</td>
-<td>1500 门课不需要数据库，文件系统够用</td>
+<td>Vector DB 语义检索</td>
+<td>❌ 直接读文件 + 内置模板</td>
+<td>1500 门课不需要数据库</td>
 </tr>
 <tr>
-<td>React + TypeScript 前端</td>
+<td>React 前端</td>
 <td>❌ 原生 JS + Tailwind</td>
-<td>快速迭代，无构建步骤</td>
+<td>快速迭代，不需要构建工具</td>
 </tr>
 <tr>
-<td>用户登录&#x2F;数据库</td>
-<td>❌ 纯前端 localStorage</td>
-<td>MVP 不需要后端状态管理</td>
+<td>用户登录</td>
+<td>❌ localStorage</td>
+<td>MVP 不需要后端状态</td>
 </tr>
 </tbody></table>
-<p><strong>结果</strong>：3 周完成开发 + 2 周内测，验证了核心假设都成立。</p>
+<p><strong>结果</strong>：3 周开发 + 2 周内测，三个假设都验证通过了。</p>
 <hr>
-<h2 id="🏗️-系统架构：最小可行技术栈"><a href="#🏗️-系统架构：最小可行技术栈" class="headerlink" title="🏗️ 系统架构：最小可行技术栈"></a>🏗️ 系统架构：最小可行技术栈</h2><h3 id="整体设计图"><a href="#整体设计图" class="headerlink" title="整体设计图"></a>整体设计图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">    subgraph &quot;前端 Frontend&quot;</span><br><span class="line">        A1[Orbit UI&lt;br/&gt;行星轨道交互]</span><br><span class="line">        A2[5 个功能模块&lt;br/&gt;聊天/规划/选课/追踪/资源]</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    subgraph &quot;后端 Backend - 227 行&quot;</span><br><span class="line">        B1[Flask API&lt;br/&gt;单个 /api/chat 接口]</span><br><span class="line">        B2[Hybrid Context Engine&lt;br/&gt;本地 PDF + 内置模板]</span><br><span class="line">        B3[Smart Routing&lt;br/&gt;Flash vs. Pro 自动选择]</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    subgraph &quot;知识库 Knowledge Base&quot;</span><br><span class="line">        C1[36 份培养方案 PDF&lt;br/&gt;直接从学院官网下载]</span><br><span class="line">        C2[内置权威资料&lt;br/&gt;CS + MKT 硬编码模板]</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    subgraph &quot;LLM&quot;</span><br><span class="line">        D1[Gemini 2.5 Flash&lt;br/&gt;快速查询 ~1.5s]</span><br><span class="line">        D2[Gemini 3 Pro Preview&lt;br/&gt;深度规划 ~4s]</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    A1 --&gt; A2</span><br><span class="line">    A2 --&gt;|REST API| B1</span><br><span class="line">    B1 --&gt; B2</span><br><span class="line">    B2 --&gt; C1</span><br><span class="line">    B2 --&gt; C2</span><br><span class="line">    B3 --&gt; D1</span><br><span class="line">    B3 --&gt; D2</span><br><span class="line">    B1 --&gt; B3</span><br><span class="line">    </span><br><span class="line">    style B2 fill:#3b82f6,stroke:#1e40af,color:#fff</span><br><span class="line">    style B3 fill:#8b5cf6,stroke:#6d28d9,color:#fff</span><br><span class="line">    style C1 fill:#10b981,stroke:#059669,color:#fff</span><br></pre></td></tr></table></figure>
+<h2 id="🏗️-架构"><a href="#🏗️-架构" class="headerlink" title="🏗️ 架构"></a>🏗️ 架构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">    subgraph &quot;前端&quot;</span><br><span class="line">        A1[Orbit UI 行星轨道交互]</span><br><span class="line">        A2[5 个功能模块]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    subgraph &quot;后端 - 227 行&quot;</span><br><span class="line">        B1[Flask API]</span><br><span class="line">        B2[Hybrid Context Engine]</span><br><span class="line">        B3[Smart Routing]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    subgraph &quot;知识库&quot;</span><br><span class="line">        C1[36 份培养方案 PDF]</span><br><span class="line">        C2[内置权威资料模板]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    subgraph &quot;LLM&quot;</span><br><span class="line">        D1[Gemini 2.5 Flash ~1.5s]</span><br><span class="line">        D2[Gemini 3 Pro ~4s]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    A1 --&gt; A2</span><br><span class="line">    A2 --&gt;|REST API| B1</span><br><span class="line">    B1 --&gt; B2</span><br><span class="line">    B2 --&gt; C1</span><br><span class="line">    B2 --&gt; C2</span><br><span class="line">    B3 --&gt; D1</span><br><span class="line">    B3 --&gt; D2</span><br><span class="line">    B1 --&gt; B3</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="💡-核心创新-1：Hybrid-Context（混合上下文）"><a href="#💡-核心创新-1：Hybrid-Context（混合上下文）" class="headerlink" title="💡 核心创新 1：Hybrid Context（混合上下文）"></a>💡 核心创新 1：Hybrid Context（混合上下文）</h2><h3 id="问题：如何在没有-Vector-DB-的情况下做-RAG？"><a href="#问题：如何在没有-Vector-DB-的情况下做-RAG？" class="headerlink" title="问题：如何在没有 Vector DB 的情况下做 RAG？"></a>问题：如何在没有 Vector DB 的情况下做 RAG？</h3><p><strong>传统 RAG 方案</strong>：</p>
-<ol>
-<li>用 Embedding 模型把文档切块 → 存入 Chroma&#x2F;Pinecone</li>
-<li>用户提问 → 查询 Top-K 相似文档</li>
-<li>拼接上下文 → 喂给 LLM</li>
-</ol>
-<p><strong>问题</strong>：</p>
-<ul>
-<li>需要 Embedding 模型（OpenAI $0.0001&#x2F;1K tokens，或本地模型 ~500MB）</li>
-<li>需要 Vector DB（冷启动慢，本地部署复杂）</li>
-<li>对于 36 份 PDF（&lt;50MB 总大小），”杀鸡用牛刀”</li>
-</ul>
-<h3 id="MVP-方案：Hybrid-Context-本地-PDF-硬编码模板"><a href="#MVP-方案：Hybrid-Context-本地-PDF-硬编码模板" class="headerlink" title="MVP 方案：Hybrid Context &#x3D; 本地 PDF + 硬编码模板"></a>MVP 方案：Hybrid Context &#x3D; 本地 PDF + 硬编码模板</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_get_hybrid_context</span>(<span class="params">major: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    combined_text = <span class="string">&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 1. 动态加载本地 PDF（PyPDF2）</span></span><br><span class="line">    <span class="keyword">if</span> KNOWLEDGE_DIR.exists():</span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> KNOWLEDGE_DIR.glob(<span class="string">&quot;*&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> major <span class="keyword">in</span> f.stem <span class="keyword">or</span> f.stem <span class="keyword">in</span> major:  <span class="comment"># 模糊匹配专业名</span></span><br><span class="line">                content = _read_file(f)</span><br><span class="line">                combined_text += <span class="string">f&quot;\n\n=== <span class="subst">&#123;f.name&#125;</span> ===\n<span class="subst">&#123;content[:<span class="number">50000</span>]&#125;</span>&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. 注入内置&quot;权威模板&quot;（硬编码）</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;计算机&quot;</span> <span class="keyword">in</span> major <span class="keyword">or</span> <span class="string">&quot;CS&quot;</span> <span class="keyword">in</span> major:</span><br><span class="line">        combined_text += <span class="string">f&quot;\n\n=== 内置权威资料 (CS) ===\n<span class="subst">&#123;BUILTIN_CONTEXTS[<span class="string">&#x27;CS&#x27;</span>]&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;市场&quot;</span> <span class="keyword">in</span> major <span class="keyword">or</span> <span class="string">&quot;MKT&quot;</span> <span class="keyword">in</span> major:</span><br><span class="line">        combined_text += <span class="string">f&quot;\n\n=== 内置权威资料 (MKT) ===\n<span class="subst">&#123;BUILTIN_CONTEXTS[<span class="string">&#x27;MKT&#x27;</span>]&#125;</span>&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> combined_text</span><br></pre></td></tr></table></figure>
+<h2 id="💡-核心设计"><a href="#💡-核心设计" class="headerlink" title="💡 核心设计"></a>💡 核心设计</h2><h3 id="1-Hybrid-Context：不用-Vector-DB-的-RAG"><a href="#1-Hybrid-Context：不用-Vector-DB-的-RAG" class="headerlink" title="1. Hybrid Context：不用 Vector DB 的 RAG"></a>1. Hybrid Context：不用 Vector DB 的 RAG</h3><p>传统做法是把文档切块存进向量数据库，用户提问时检索相似片段再喂给 LLM。但 36 份 PDF 加起来不到 50MB，上向量数据库有点大材小用。</p>
+<p>我的做法是直接读本地 PDF + 硬编码一些权威模板：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_get_hybrid_context</span>(<span class="params">major: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    combined_text = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 动态加载本地 PDF</span></span><br><span class="line">    <span class="keyword">if</span> KNOWLEDGE_DIR.exists():</span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> KNOWLEDGE_DIR.glob(<span class="string">&quot;*&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> major <span class="keyword">in</span> f.stem <span class="keyword">or</span> f.stem <span class="keyword">in</span> major:</span><br><span class="line">                content = _read_file(f)</span><br><span class="line">                combined_text += <span class="string">f&quot;\n\n=== <span class="subst">&#123;f.name&#125;</span> ===\n<span class="subst">&#123;content[:<span class="number">50000</span>]&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 注入内置模板（CS 和 MKT 专业手动整理的课程信息）</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;计算机&quot;</span> <span class="keyword">in</span> major <span class="keyword">or</span> <span class="string">&quot;CS&quot;</span> <span class="keyword">in</span> major:</span><br><span class="line">        combined_text += <span class="string">f&quot;\n\n=== 内置权威资料 (CS) ===\n<span class="subst">&#123;BUILTIN_CONTEXTS[<span class="string">&#x27;CS&#x27;</span>]&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> combined_text</span><br></pre></td></tr></table></figure>
 
-<p><strong>为什么这样设计？</strong></p>
-<table>
-<thead>
-<tr>
-<th>方案</th>
-<th>优点</th>
-<th>缺点</th>
-<th>MVP 选择</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Vector DB</strong></td>
-<td>语义搜索精准</td>
-<td>需要额外组件，冷启动慢</td>
-<td>❌</td>
-</tr>
-<tr>
-<td><strong>全文检索（regex）</strong></td>
-<td>简单快速</td>
-<td>无法理解语义</td>
-<td>❌</td>
-</tr>
-<tr>
-<td><strong>Hybrid（PDF + 模板）</strong></td>
-<td>零依赖，响应快</td>
-<td>需要手动维护模板</td>
-<td>✅</td>
-</tr>
-</tbody></table>
-<p><strong>结果</strong>：</p>
-<ul>
-<li>响应时间：&lt;100ms（本地文件读取）</li>
-<li>准确率：在”CS&#x2F;MKT 必修课查询”任务中达到 92%（15 个测试用例）</li>
-<li>可维护性：新增专业只需加一个 PDF，无需重新训练</li>
-</ul>
+<p>效果：响应 &lt;100ms，CS&#x2F;MKT 必修课查询准确率 92%，新增专业只需加一个 PDF。</p>
+<h3 id="2-Smart-Routing：自动选模型"><a href="#2-Smart-Routing：自动选模型" class="headerlink" title="2. Smart Routing：自动选模型"></a>2. Smart Routing：自动选模型</h3><p>Flash 快但不适合复杂问题，Pro 准但慢且贵。简单做了个关键词路由：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">route_model</span>(<span class="params">messages</span>):</span><br><span class="line">    all_text = <span class="string">&quot; &quot;</span>.join(msg.get(<span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="keyword">for</span> msg <span class="keyword">in</span> messages).lower()</span><br><span class="line"></span><br><span class="line">    flash_triggers = [<span class="string">&quot;low latency mode&quot;</span>, <span class="string">&quot;json generator&quot;</span>,</span><br><span class="line">                      <span class="string">&quot;list 3-4 *alternative* research&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">any</span>(trigger <span class="keyword">in</span> all_text <span class="keyword">for</span> trigger <span class="keyword">in</span> flash_triggers):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;gemini-2.5-flash&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;gemini-3-pro-preview&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试了 50 个查询：路由准确率 88%，平均响应 2.1s（全用 Pro 要 4s），成本节省 42%。</p>
+<h3 id="3-Orbit-UI：行星轨道交互"><a href="#3-Orbit-UI：行星轨道交互" class="headerlink" title="3. Orbit UI：行星轨道交互"></a>3. Orbit UI：行星轨道交互</h3><p>传统的标签栏导航太无聊了。我把 5 个功能模块做成围绕中心球体的行星轨道布局：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   追踪 🎯</span><br><span class="line">      \</span><br><span class="line">聊天 💬  ● 全人助手  🗂️ 规划</span><br><span class="line">      /        \</span><br><span class="line"> 选课 📚        📖 资源</span><br></pre></td></tr></table></figure>
+
+<p>用绝对定位实现，<code>transform: scale(0.65)</code> 适配手机。内测反馈说”第一次见到不像表格的选课工具”，但也有人一开始不知道该点哪个，后来加了脉动动画引导。</p>
 <hr>
-<h2 id="💡-核心创新-2：Smart-Routing（智能路由）"><a href="#💡-核心创新-2：Smart-Routing（智能路由）" class="headerlink" title="💡 核心创新 2：Smart Routing（智能路由）"></a>💡 核心创新 2：Smart Routing（智能路由）</h2><h3 id="问题：Gemini-Flash-vs-Pro-该怎么选？"><a href="#问题：Gemini-Flash-vs-Pro-该怎么选？" class="headerlink" title="问题：Gemini Flash vs. Pro 该怎么选？"></a>问题：Gemini Flash vs. Pro 该怎么选？</h3><table>
-<thead>
-<tr>
-<th>模型</th>
-<th>响应时间</th>
-<th>多轮推理</th>
-<th>成本</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Gemini 2.5 Flash</strong></td>
-<td>~1.5s</td>
-<td>中等</td>
-<td>$0.075&#x2F;1M tokens</td>
-<td>简单查询（”这门课几学分？”）</td>
-</tr>
-<tr>
-<td><strong>Gemini 3 Pro Preview</strong></td>
-<td>~4s</td>
-<td>强</td>
-<td>$0.35&#x2F;1M tokens</td>
-<td>复杂规划（”帮我排这学期的课”）</td>
-</tr>
-</tbody></table>
-<p><strong>如果全用 Flash</strong>：复杂查询会”答非所问”<br><strong>如果全用 Pro</strong>：简单查询”杀鸡用牛刀”，成本 +367%</p>
-<h3 id="MVP-方案：基于关键词的自动路由"><a href="#MVP-方案：基于关键词的自动路由" class="headerlink" title="MVP 方案：基于关键词的自动路由"></a>MVP 方案：基于关键词的自动路由</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">route_model</span>(<span class="params">messages</span>):</span><br><span class="line">    all_text = <span class="string">&quot; &quot;</span>.join(msg.get(<span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="keyword">for</span> msg <span class="keyword">in</span> messages).lower()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Flash 触发词（快速查询）</span></span><br><span class="line">    flash_triggers = [</span><br><span class="line">        <span class="string">&quot;low latency mode&quot;</span>,  <span class="comment"># 开发者调试用</span></span><br><span class="line">        <span class="string">&quot;json generator&quot;</span>,    <span class="comment"># 结构化输出</span></span><br><span class="line">        <span class="string">&quot;list 3-4 *alternative* research&quot;</span>  <span class="comment"># 简单列表</span></span><br><span class="line">    ]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">any</span>(trigger <span class="keyword">in</span> all_text <span class="keyword">for</span> trigger <span class="keyword">in</span> flash_triggers):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;gemini-2.5-flash&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 默认用 Pro（保守策略）</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;gemini-3-pro-preview&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>为什么不用 AI 做路由？</strong></p>
-<ul>
-<li>用 GPT-4 mini 做意图分类 → 增加 200ms 延迟 + 额外成本</li>
-<li>MVP 阶段，简单规则够用</li>
-</ul>
-<p><strong>测试结果</strong>（n&#x3D;50）：</p>
-<ul>
-<li>路由准确率：88%（44&#x2F;50 正确分配）</li>
-<li>平均响应时间：2.1s（vs. 全 Pro 的 4s）</li>
-<li>成本节省：42%</li>
-</ul>
-<hr>
-<h2 id="🎨-核心创新-3：Orbit-UI（行星轨道交互）"><a href="#🎨-核心创新-3：Orbit-UI（行星轨道交互）" class="headerlink" title="🎨 核心创新 3：Orbit UI（行星轨道交互）"></a>🎨 核心创新 3：Orbit UI（行星轨道交互）</h2><h3 id="设计理念：从”列表”到”空间”"><a href="#设计理念：从”列表”到”空间”" class="headerlink" title="设计理念：从”列表”到”空间”"></a>设计理念：从”列表”到”空间”</h3><p><strong>传统学业助手 UI</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">顶部导航栏</span><br><span class="line">├─ 聊天</span><br><span class="line">├─ 规划</span><br><span class="line">├─ 选课</span><br><span class="line">└─ 追踪</span><br></pre></td></tr></table></figure>
-
-<p><strong>问题</strong>：</p>
-<ul>
-<li>功能平铺，没有”探索感”</li>
-<li>新用户不知道”该点哪个”</li>
-<li>像”工具箱”，不像”助手”</li>
-</ul>
-<h3 id="MVP-方案：行星轨道系统"><a href="#MVP-方案：行星轨道系统" class="headerlink" title="MVP 方案：行星轨道系统"></a>MVP 方案：行星轨道系统</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   追踪 🎯</span><br><span class="line">      \</span><br><span class="line">聊天 💬  ● 全人助手  🗂️ 规划</span><br><span class="line">      /        \</span><br><span class="line"> 选课 📚        📖 资源</span><br></pre></td></tr></table></figure>
-
-<p><strong>实现细节</strong>：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.orbit-system-container</span> &#123; </span><br><span class="line">    <span class="attribute">width</span>: <span class="number">800px</span>; <span class="attribute">height</span>: <span class="number">600px</span>; </span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.central-sphere</span> &#123; </span><br><span class="line">    <span class="attribute">position</span>: absolute; </span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>; <span class="attribute">height</span>: <span class="number">200px</span>; </span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>; </span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.module-btn</span> &#123; </span><br><span class="line">    <span class="attribute">position</span>: absolute; </span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">999</span>; <span class="comment">/* 关键：防止被轨道线遮挡 */</span></span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 5 个按钮的坐标 */</span></span><br><span class="line"><span class="selector-class">.pos-chat</span> &#123; <span class="attribute">top</span>: <span class="number">38%</span>; <span class="attribute">left</span>: <span class="number">8%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pos-plan</span> &#123; <span class="attribute">top</span>: <span class="number">62%</span>; <span class="attribute">left</span>: <span class="number">87%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pos-select</span> &#123; <span class="attribute">top</span>: <span class="number">78%</span>; <span class="attribute">left</span>: <span class="number">32%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pos-tracking</span> &#123; <span class="attribute">top</span>: <span class="number">12%</span>; <span class="attribute">left</span>: <span class="number">70%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pos-resources</span> &#123; <span class="attribute">top</span>: <span class="number">85%</span>; <span class="attribute">left</span>: <span class="number">65%</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>为什么这样设计？</strong></p>
-<ul>
-<li><strong>空间记忆</strong>：用户记得”聊天在左上，规划在右下”，比记”第 3 个标签”更直观</li>
-<li><strong>探索感</strong>：像”星系导航”，降低学业规划的枯燥感</li>
-<li><strong>移动适配</strong>：<code>transform: scale(0.65)</code> 自动缩放到手机屏幕</li>
-</ul>
-<p><strong>用户反馈</strong>（n&#x3D;12, 内测）：</p>
-<blockquote>
-<p>“第一次看到不像’表格’的选课工具”<br>“很酷，但一开始不知道该点哪个（后来加了脉动提示）”</p>
-</blockquote>
-<hr>
-<h2 id="📊-MVP-验证结果"><a href="#📊-MVP-验证结果" class="headerlink" title="📊 MVP 验证结果"></a>📊 MVP 验证结果</h2><h3 id="定量指标"><a href="#定量指标" class="headerlink" title="定量指标"></a>定量指标</h3><table>
+<h2 id="📊-验证结果"><a href="#📊-验证结果" class="headerlink" title="📊 验证结果"></a>📊 验证结果</h2><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><table>
 <thead>
 <tr>
 <th>指标</th>
 <th>目标</th>
 <th>实际</th>
-<th>达标？</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>可用性</strong>（无崩溃运行 7 天）</td>
+<td>无崩溃运行 7 天</td>
 <td>&gt;90%</td>
-<td>98.2%</td>
-<td>✅</td>
+<td>98.2% ✅</td>
 </tr>
 <tr>
-<td><strong>响应时间</strong>（P50）</td>
+<td>响应时间 P50</td>
 <td>&lt;3s</td>
-<td>2.1s</td>
-<td>✅</td>
+<td>2.1s ✅</td>
 </tr>
 <tr>
-<td><strong>PDF 解析成功率</strong></td>
+<td>PDF 解析成功率</td>
 <td>&gt;80%</td>
-<td>94% (34&#x2F;36 PDFs)</td>
-<td>✅</td>
+<td>94% (34&#x2F;36) ✅</td>
 </tr>
 <tr>
-<td><strong>用户留存</strong>（7 天内回访）</td>
+<td>7 天内回访率</td>
 <td>&gt;40%</td>
-<td>58% (7&#x2F;12)</td>
-<td>✅</td>
+<td>58% (7&#x2F;12) ✅</td>
 </tr>
 </tbody></table>
-<h3 id="定性反馈"><a href="#定性反馈" class="headerlink" title="定性反馈"></a>定性反馈</h3><p><strong>最常见的正面评价</strong>：</p>
-<ol>
-<li>“终于不用手动翻 PDF 了”（11&#x2F;12 人提及）</li>
-<li>“AI 回答比学长靠谱”（8&#x2F;12 人）</li>
-<li>“UI 很有意思”（6&#x2F;12 人）</li>
-</ol>
-<p><strong>最常见的吐槽</strong>：</p>
-<ol>
-<li>“能不能告诉我这学期开不开课？”（9&#x2F;12 人）→ 这直接导致了 v2 的 SIS 爬虫</li>
-<li>“有些 PDF 读不出来&#x2F;格式乱”（3&#x2F;12 人）→ 后来用 Gemini 做 PDF 提取</li>
-<li>“规划功能太弱，只能问问题”（5&#x2F;12 人）→ 后来加了”可视化路线图”</li>
-</ol>
-<hr>
-<h2 id="🔍-MVP-的技术债务（为什么需要-v2）"><a href="#🔍-MVP-的技术债务（为什么需要-v2）" class="headerlink" title="🔍 MVP 的技术债务（为什么需要 v2）"></a>🔍 MVP 的技术债务（为什么需要 v2）</h2><h3 id="1-PDF-解析不稳定"><a href="#1-PDF-解析不稳定" class="headerlink" title="1. PDF 解析不稳定"></a>1. PDF 解析不稳定</h3><p><strong>问题</strong>：PyPDF2 在 2 份 PDF 上失败（扫描版&#x2F;特殊编码）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MVP 的简单粗暴方案</span></span><br><span class="line">text = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> reader.pages:</span><br><span class="line">    text += (page.extract_text() <span class="keyword">or</span> <span class="string">&quot;&quot;</span>) + <span class="string">&quot;\n&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>v2 改进</strong>：用 Gemini Vision API 直接读 PDF（OCR + 结构化理解）</p>
-<h3 id="2-无”开课信息”"><a href="#2-无”开课信息”" class="headerlink" title="2. 无”开课信息”"></a>2. 无”开课信息”</h3><p><strong>问题</strong>：用户最高频的需求是”这学期开不开”，但培养方案 PDF 只有课程列表</p>
-<p><strong>v2 改进</strong>：Playwright 爬取 SIS，整合 3 学期开课数据</p>
-<h3 id="3-Context-Window-浪费"><a href="#3-Context-Window-浪费" class="headerlink" title="3. Context Window 浪费"></a>3. Context Window 浪费</h3><p><strong>问题</strong>：每次都把整个 PDF（50K tokens）喂给模型，即使用户只问”CSC1001 几学分”</p>
-<p><strong>v2 改进</strong>：按课程分片存储（<code>courses/&lt;CODE&gt;/metadata.json</code>），只加载相关课程</p>
-<h3 id="4-硬编码模板难维护"><a href="#4-硬编码模板难维护" class="headerlink" title="4. 硬编码模板难维护"></a>4. 硬编码模板难维护</h3><p><strong>问题</strong>：每次培养方案更新，需要手动改 <code>BUILTIN_CONTEXTS</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BUILTIN_CONTEXTS = &#123;</span><br><span class="line">    <span class="string">&quot;CS&quot;</span>: <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    (1) 主修必修: CSC3001, CSC3060, CSC3200... # 如果学校改了，这里也要改</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>v2 改进</strong>：从 PDF 自动提取结构化信息，无需手动维护</p>
-<hr>
-<h2 id="🚀-从-MVP-到-v2：路线图"><a href="#🚀-从-MVP-到-v2：路线图" class="headerlink" title="🚀 从 MVP 到 v2：路线图"></a>🚀 从 MVP 到 v2：路线图</h2><h3 id="MVP-验证了什么？"><a href="#MVP-验证了什么？" class="headerlink" title="MVP 验证了什么？"></a>MVP 验证了什么？</h3><p>✅ <strong>需求真实存在</strong>：12 个内测用户中，7 个在 7 天内回访<br>✅ <strong>技术可行</strong>：Gemini 能理解中文培养方案并给出靠谱建议<br>✅ <strong>成本可控</strong>：36 个专业的 PDF，文件系统 + Hybrid Context 够用</p>
-<h3 id="v2-要解决什么？"><a href="#v2-要解决什么？" class="headerlink" title="v2 要解决什么？"></a>v2 要解决什么？</h3><p>基于用户反馈，优先级排序：</p>
-<ol>
-<li><strong>P0（必须有）</strong>：SIS 开课信息整合（9&#x2F;12 人提及）</li>
-<li><strong>P1（重要）</strong>：PDF 提取升级（用 AI 替代 PyPDF2）</li>
-<li><strong>P2（优化）</strong>：可视化路线图（课程可点击）</li>
-<li><strong>P3（长期）</strong>：课程评价&#x2F;教师风格（需合规审查）</li>
-</ol>
-<hr>
-<h2 id="💻-关键代码片段"><a href="#💻-关键代码片段" class="headerlink" title="💻 关键代码片段"></a>💻 关键代码片段</h2><h3 id="1-Hybrid-Context-组装"><a href="#1-Hybrid-Context-组装" class="headerlink" title="1. Hybrid Context 组装"></a>1. Hybrid Context 组装</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_get_hybrid_context</span>(<span class="params">major: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    混合上下文引擎：本地 PDF + 硬编码模板</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    为什么不用 Vector DB？</span></span><br><span class="line"><span class="string">    - 36 份 PDF（&lt;50MB）不需要分布式检索</span></span><br><span class="line"><span class="string">    - 文件系统读取 &lt;100ms，Vector DB 冷启动 &gt;1s</span></span><br><span class="line"><span class="string">    - MVP 阶段避免引入额外依赖</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    combined_text = <span class="string">&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 1. 本地 PDF 动态加载</span></span><br><span class="line">    <span class="keyword">if</span> KNOWLEDGE_DIR.exists():</span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> KNOWLEDGE_DIR.glob(<span class="string">&quot;*&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> f.suffix.lower() <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">&#x27;.pdf&#x27;</span>, <span class="string">&#x27;.txt&#x27;</span>]:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="comment"># 模糊匹配（如&quot;计算机&quot;匹配&quot;计算机科学与技术.pdf&quot;）</span></span><br><span class="line">            <span class="keyword">if</span> major != <span class="string">&quot;通用&quot;</span> <span class="keyword">and</span> (major <span class="keyword">in</span> f.stem <span class="keyword">or</span> f.stem <span class="keyword">in</span> major):</span><br><span class="line">                content = _read_file(f)</span><br><span class="line">                <span class="keyword">if</span> content:</span><br><span class="line">                    combined_text += <span class="string">f&quot;\n\n=== <span class="subst">&#123;f.name&#125;</span> ===\n<span class="subst">&#123;content[:<span class="number">50000</span>]&#125;</span>&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. 内置权威模板（硬编码，便于快速迭代）</span></span><br><span class="line">    major_upper = major.upper()</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;计算机&quot;</span> <span class="keyword">in</span> major <span class="keyword">or</span> <span class="string">&quot;CS&quot;</span> <span class="keyword">in</span> major_upper:</span><br><span class="line">        combined_text += <span class="string">f&quot;\n\n=== 内置权威资料 (CS) ===\n<span class="subst">&#123;BUILTIN_CONTEXTS[<span class="string">&#x27;CS&#x27;</span>]&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;市场&quot;</span> <span class="keyword">in</span> major <span class="keyword">or</span> <span class="string">&quot;MKT&quot;</span> <span class="keyword">in</span> major_upper:</span><br><span class="line">        combined_text += <span class="string">f&quot;\n\n=== 内置权威资料 (MKT) ===\n<span class="subst">&#123;BUILTIN_CONTEXTS[<span class="string">&#x27;MKT&#x27;</span>]&#125;</span>&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> combined_text</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-Smart-Routing-实现"><a href="#2-Smart-Routing-实现" class="headerlink" title="2. Smart Routing 实现"></a>2. Smart Routing 实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">api_chat</span>():</span><br><span class="line">    <span class="comment"># 1. 提取用户专业（从历史消息反向查找）</span></span><br><span class="line">    major = <span class="string">&quot;通用&quot;</span></span><br><span class="line">    <span class="keyword">for</span> msg <span class="keyword">in</span> <span class="built_in">reversed</span>(messages):</span><br><span class="line">        m = re.search(</span><br><span class="line">            <span class="string">r&quot;(?:学生专业|Student Major|Major)[：:]\s*([a-zA-Z\u4e00-\u9fa5]+)&quot;</span>, </span><br><span class="line">            msg.get(<span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;&#x27;</span>), </span><br><span class="line">            re.IGNORECASE</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">if</span> m:</span><br><span class="line">            major = m.group(<span class="number">1</span>).strip()</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. 智能路由（基于关键词）</span></span><br><span class="line">    all_text = <span class="string">&quot; &quot;</span>.join(msg.get(<span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="keyword">for</span> msg <span class="keyword">in</span> messages).lower()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Flash 触发词</span></span><br><span class="line">    flash_triggers = [</span><br><span class="line">        <span class="string">&quot;low latency mode&quot;</span>,</span><br><span class="line">        <span class="string">&quot;json generator&quot;</span>,</span><br><span class="line">        <span class="string">&quot;list 3-4 *alternative* research&quot;</span></span><br><span class="line">    ]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">any</span>(trigger <span class="keyword">in</span> all_text <span class="keyword">for</span> trigger <span class="keyword">in</span> flash_triggers):</span><br><span class="line">        selected_model = <span class="string">&quot;gemini-2.5-flash&quot;</span></span><br><span class="line">        model_tag = <span class="string">&quot;[FLASH]&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        selected_model = <span class="string">&quot;gemini-3-pro-preview&quot;</span></span><br><span class="line">        model_tag = <span class="string">&quot;[PRO]&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Routing to <span class="subst">&#123;model_tag&#125;</span> -&gt; <span class="subst">&#123;selected_model&#125;</span>&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3. 注入知识库</span></span><br><span class="line">    context = _get_hybrid_context(major)</span><br><span class="line">    <span class="keyword">if</span> context:</span><br><span class="line">        sys_msg = <span class="string">f&quot;你是专业学业规划师。【专属知识库】：\n<span class="subst">&#123;context&#125;</span>&quot;</span></span><br><span class="line">        messages.insert(<span class="number">0</span>, &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: sys_msg&#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 4. 调用 LLM</span></span><br><span class="line">    resp = _call_chat_backend(cfg, messages, selected_model)</span><br><span class="line">    <span class="keyword">return</span> jsonify(resp)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="🎓-MVP-阶段的收获"><a href="#🎓-MVP-阶段的收获" class="headerlink" title="🎓 MVP 阶段的收获"></a>🎓 MVP 阶段的收获</h2><h3 id="技术层面"><a href="#技术层面" class="headerlink" title="技术层面"></a>技术层面</h3><p><strong>Before MVP</strong>:</p>
+<h3 id="用户反馈（12-人内测）"><a href="#用户反馈（12-人内测）" class="headerlink" title="用户反馈（12 人内测）"></a>用户反馈（12 人内测）</h3><p><strong>好评</strong>：</p>
 <ul>
-<li>认为”RAG &#x3D; 必须用 Vector DB”</li>
-<li>不知道 Gemini Flash 和 Pro 的实际差异</li>
-<li>觉得”前端必须用框架（React&#x2F;Vue）”</li>
+<li>“终于不用手动去官网上下载和翻PDF了”（11&#x2F;12）</li>
+<li>“接入了知识库的AI回答比直接上网搜索靠谱”（8&#x2F;12）</li>
 </ul>
-<p><strong>After MVP</strong>:</p>
+<p><strong>吐槽</strong>：</p>
 <ul>
-<li>理解了”技术选型要看规模”（&lt;50MB 数据用文件系统够了）</li>
-<li>学会了用”关键词路由”做模型选择（比 AI 分类快 10 倍）</li>
-<li>体会到”原生 JS + Tailwind”在快速原型阶段的优势（无构建步骤）</li>
+<li>“能不能告诉我这学期开不开课？”（9&#x2F;12）→ 直接推动了 v2 做 SIS 爬虫</li>
+<li>“有些 PDF 格式乱”（3&#x2F;12）→ 后来用 Gemini 做 PDF 提取</li>
+<li>“规划功能太弱”（5&#x2F;12）→ 后来加了可视化路线图</li>
 </ul>
-<h3 id="产品层面"><a href="#产品层面" class="headerlink" title="产品层面"></a>产品层面</h3><p><strong>最大发现</strong>：用户真正想要的不是”聊天机器人”，而是**”能点击的决策辅助”**</p>
+<hr>
+<h2 id="⚠️-MVP-的核心缺陷：AI-输出不受控"><a href="#⚠️-MVP-的核心缺陷：AI-输出不受控" class="headerlink" title="⚠️ MVP 的核心缺陷：AI 输出不受控"></a>⚠️ MVP 的核心缺陷：AI 输出不受控</h2><p>MVP 阶段最大的问题其实不是技术栈选型，而是 <strong>AI 的回答太不受约束了</strong>。</p>
+<p>理想中的效果是：用户问”CS 大二应该选什么课”，系统基于培养方案给出结构化的推荐。但实际情况是，AI 经常自由发挥：</p>
+<ul>
+<li><strong>编造不存在的课程</strong>：比如培养方案里没有”CSC2050”，但 AI 会自信地推荐它，还编一段课程描述</li>
+<li><strong>忽略约束条件</strong>：用户说”我只剩 12 学分”，AI 推荐了 18 学分的课表，完全无视限制</li>
+<li><strong>风格不一致</strong>：同一个问题问两遍，回答格式、详细程度差异很大，有时是表格，有时是大段文字</li>
+<li><strong>过度”热情”</strong>：经常给出与问题无关的建议，比如问学分要求，它还会”顺便”规划整个大学四年</li>
+</ul>
+<p>简单来说，MVP 阶段的 AI 更像是一个”什么都敢说的热心学长”，而不是一个可靠的学业顾问。这和理想中那种”精确、有据可依、格式统一”的效果出入很大。</p>
+<p>这个问题直接推动了 v2 的两个改进方向：</p>
+<ol>
+<li><strong>用 Hybrid Context 注入官方数据</strong>，让 AI 只基于给定事实回答</li>
+<li><strong>在 Prompt 里加硬性约束</strong>（”If data is missing, say 官方数据未提供”），强制 AI 承认不知道</li>
+</ol>
+<hr>
+<h2 id="🔍-技术债和-v2-方向"><a href="#🔍-技术债和-v2-方向" class="headerlink" title="🔍 技术债和 v2 方向"></a>🔍 技术债和 v2 方向</h2><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>原因</th>
+<th>v2 怎么解决</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2 份 PDF 解析失败</td>
+<td>PyPDF2 处理不了扫描版</td>
+<td>换 Gemini Vision API</td>
+</tr>
+<tr>
+<td>没有开课信息</td>
+<td>PDF 只有课程列表</td>
+<td>Playwright 爬 SIS</td>
+</tr>
+<tr>
+<td>每次喂整个 PDF（50K tokens）</td>
+<td>没做按需加载</td>
+<td>按课程分片存 JSON</td>
+</tr>
+<tr>
+<td>硬编码模板难维护</td>
+<td>培养方案改了就要手动改代码</td>
+<td>从 PDF 自动提取</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🎓-我学到了什么"><a href="#🎓-我学到了什么" class="headerlink" title="🎓 我学到了什么"></a>🎓 我学到了什么</h2><p><strong>技术上</strong>：</p>
+<ul>
+<li>RAG 不一定要上 Vector DB，数据量小的时候文件系统就够了</li>
+<li>简单的关键词路由比用 AI 做意图分类快 10 倍，MVP 阶段够用</li>
+<li>原生 JS + Tailwind 做原型很快，不需要构建步骤</li>
+</ul>
+<p><strong>产品上</strong>：<br>用户真正想要的不是聊天机器人，而是<strong>能点击的决策工具</strong>：</p>
 <blockquote>
-<p>“我不想打字问’CSC3100 先修是什么’，我想在课程表上点一下就能看到” —— 内测用户反馈</p>
+<p>“我不想打字问’CSC3100 先修是什么’，我想在课程表上点一下就能看到”</p>
 </blockquote>
-<p>这直接影响了 v2 的设计：</p>
-<ul>
-<li>从”纯聊天”→”可视化路线图 + 课程可点击”</li>
-<li>从”问答式”→”探索式”交互</li>
-</ul>
+<p>这直接影响了 v2 的方向：从纯聊天变成可视化路线图 + 课程可点击。</p>
 <hr>
-<h2 id="📚-技术栈总结"><a href="#📚-技术栈总结" class="headerlink" title="📚 技术栈总结"></a>📚 技术栈总结</h2><table>
+<h2 id="📚-技术栈"><a href="#📚-技术栈" class="headerlink" title="📚 技术栈"></a>📚 技术栈</h2><table>
 <thead>
 <tr>
 <th>层级</th>
 <th>技术</th>
-<th>版本</th>
-<th>为什么选它</th>
+<th>选择理由</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>前端</strong></td>
+<td>前端</td>
 <td>Vanilla JS + Tailwind</td>
-<td>-</td>
-<td>零构建步骤，快速迭代</td>
+<td>零构建，快速迭代</td>
 </tr>
 <tr>
-<td><strong>后端</strong></td>
+<td>后端</td>
 <td>Flask</td>
-<td>3.0</td>
-<td>最简单的 REST API 框架</td>
+<td>最简单的 Python API 框架</td>
 </tr>
 <tr>
-<td><strong>LLM</strong></td>
-<td>Gemini 2.5 Flash + 3 Pro</td>
-<td>-</td>
-<td>Flash 快（1.5s），Pro 准（复杂推理）</td>
+<td>LLM</td>
+<td>Gemini Flash + Pro</td>
+<td>Flash 快，Pro 准</td>
 </tr>
 <tr>
-<td><strong>PDF 解析</strong></td>
+<td>PDF 解析</td>
 <td>PyPDF2</td>
-<td>3.0</td>
-<td>轻量级，无需 OCR</td>
+<td>轻量，文本型 PDF 够用</td>
 </tr>
 <tr>
-<td><strong>Knowledge Base</strong></td>
+<td>知识库</td>
 <td>本地文件系统（36 PDFs）</td>
-<td>-</td>
-<td>&lt;50MB 数据不需要数据库</td>
-</tr>
-<tr>
-<td><strong>代理</strong></td>
-<td>HTTP Proxy（for China）</td>
-<td>-</td>
-<td>校园网无法直连 Google API</td>
+<td>&lt;50MB 不需要数据库</td>
 </tr>
 </tbody></table>
-<hr>
-<h2 id="🔗-附录"><a href="#🔗-附录" class="headerlink" title="🔗 附录"></a>🔗 附录</h2><h3 id="MVP-Demo（静态截图）"><a href="#MVP-Demo（静态截图）" class="headerlink" title="MVP Demo（静态截图）"></a>MVP Demo（静态截图）</h3><p><img src="/images/mvp-orbit-home.png" alt="Orbit UI 主页"><br><em>行星轨道式主页：5 个功能模块围绕中心球体</em></p>
-<p><img src="/images/mvp-chat-interface.png" alt="聊天界面"><br><em>AI 聊天：基于培养方案 PDF 的课程咨询</em></p>
-<p><img src="/images/mvp-plan-generator.png" alt="规划功能"><br><em>学业规划：根据专业 + 压力等级生成推荐路径</em></p>
-<hr>
-<h3 id="与-v2-的关键差异"><a href="#与-v2-的关键差异" class="headerlink" title="与 v2 的关键差异"></a>与 v2 的关键差异</h3><table>
-<thead>
-<tr>
-<th>维度</th>
-<th>MVP (11月20日)</th>
-<th>v2 (12月24日)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>数据来源</strong></td>
-<td>36 份培养方案 PDF</td>
-<td>PDF + SIS 爬虫（1568 课程 × 3 学期）</td>
-</tr>
-<tr>
-<td><strong>知识库</strong></td>
-<td>文件系统 + 硬编码模板</td>
-<td>JSON 分片存储（按课程&#x2F;学期）</td>
-</tr>
-<tr>
-<td><strong>PDF 处理</strong></td>
-<td>PyPDF2（失败率 6%）</td>
-<td>Gemini Vision API（准确率 95%+）</td>
-</tr>
-<tr>
-<td><strong>后端代码</strong></td>
-<td>227 行</td>
-<td>500+ 行（加入爬虫逻辑）</td>
-</tr>
-<tr>
-<td><strong>Context 管理</strong></td>
-<td>全量注入（50K tokens）</td>
-<td>按需加载（~2K tokens）</td>
-</tr>
-<tr>
-<td><strong>架构深度</strong></td>
-<td>MVP 验证</td>
-<td>Technical Case Study</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="📚-MVP-前的技术学习"><a href="#📚-MVP-前的技术学习" class="headerlink" title="📚 MVP 前的技术学习"></a>📚 MVP 前的技术学习</h2><p>在 MVP 开发前的 2 周，我集中学习了以下技术栈：</p>
-<h3 id="后端技术"><a href="#后端技术" class="headerlink" title="后端技术"></a>后端技术</h3><ul>
-<li><strong>Flask</strong>：从官方文档学习 RESTful API 设计，理解 CORS、请求处理、错误处理</li>
-<li><strong>Gemini API</strong>：阅读 Google AI 文档，学习如何调用生成式 AI、处理流式响应、管理 token 限制</li>
-<li><strong>PDF 解析</strong>：研究 PyPDF2 的文本提取原理，了解常见的编码问题和扫描版 PDF 的局限性</li>
-</ul>
-<h3 id="前端技术"><a href="#前端技术" class="headerlink" title="前端技术"></a>前端技术</h3><ul>
-<li><strong>Vanilla JS + Tailwind CSS</strong>：学习现代 JS（ES6+ Promise&#x2F;Async）和 utility-first CSS 框架</li>
-<li><strong>响应式设计</strong>：研究移动端适配（viewport、媒体查询、触摸事件）</li>
-</ul>
-<h3 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h3><ul>
-<li><strong>RAG 架构</strong>：学习 Retrieval-Augmented Generation 的基本原理（检索 + 生成）</li>
-<li><strong>Context Window 管理</strong>：理解 LLM 的上下文限制和优化策略</li>
-</ul>
 <hr>
 <h2 id="🙏-致谢"><a href="#🙏-致谢" class="headerlink" title="🙏 致谢"></a>🙏 致谢</h2><ul>
-<li><strong>严明教授</strong>和<strong>贾建民教授</strong>：在项目早期给予了宝贵的建议和技术指导，帮助我明确了系统的核心价值和设计方向</li>
 <li><strong>团队成员</strong>：感谢几位同组成员在初期帮助采集培养方案 PDF、整理课程清单等基础数据工作，为后续开发奠定了基础</li>
 </ul>
 <hr>
-<p><em>本文记录 MVP 阶段（2025年11月20日）的设计与验证结果。完整的技术深度分析见 <a href="./holistic-assistant-case-study.md">v2 Case Study</a>。</em></p>
-<p><em>Contact: <a href="mailto:&#x31;&#x32;&#53;&#x30;&#57;&#48;&#52;&#x34;&#53;&#x40;&#108;&#x69;&#110;&#107;&#x2e;&#99;&#117;&#x68;&#x6b;&#46;&#x65;&#x64;&#x75;&#46;&#x63;&#x6e;">125090445@link.cuhk.edu.cn</a></em></p>
+<p><em>本文记录 MVP 阶段（2025年11月20日）的设计与验证。完整技术分析见 <a href="./holistic-assistant-case-study.md">v2 Case Study</a>。</em></p>
+<p><em>Contact: <a href="mailto:&#x31;&#50;&#x35;&#48;&#57;&#x30;&#x34;&#52;&#x35;&#64;&#108;&#x69;&#x6e;&#107;&#x2e;&#x63;&#117;&#104;&#x6b;&#x2e;&#x65;&#100;&#117;&#46;&#99;&#x6e;">125090445@link.cuhk.edu.cn</a></em></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jerry0310no1.github.io/2025/11/20/holistic-assistant-mvp/" data-id="cuidHJJ5P5T6ftA6Hpb3PzMYl" data-title="全人助手 MVP：从&#34;培养方案 PDF&#34;到 AI 驱动的学业规划（可行性验证）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://jerry0310no1.github.io/2025/11/20/holistic-assistant-mvp/" data-id="cuidAG3SxN3IUHxCw09cE1QqV" data-title="全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Prototype/" rel="tag">Prototype</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li></ul>
 
     </footer>
   </div>
@@ -501,7 +326,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Holistic Assistant: 一个面向 1500+ 学生的 RAG 学术顾问系统 — 从信息碎片化到结构化决策
+          全人助手 ③：v2 — 从 PDF 到 1568 门课程的 RAG 学业顾问系统
         
       </div>
     </a>
@@ -509,7 +334,7 @@
   
     <a href="/2025/10/02/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">第一次注册：全人助手已经在路上</div>
+      <div class="article-nav-title">全人助手 ①：项目的起点</div>
     </a>
   
 </nav>
@@ -526,7 +351,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Projects/">Projects</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical-Case-Study/">Technical Case Study</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Holistic-Assistant/">Holistic Assistant</a></li></ul>
     </div>
   </div>
 
@@ -536,7 +361,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUHK-SZ/" rel="tag">CUHK-SZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Information-Retrieval/" rel="tag">Information Retrieval</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Playwright/" rel="tag">Playwright</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prototype/" rel="tag">Prototype</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/" rel="tag">System Design</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUHK-SZ/" rel="tag">CUHK-SZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Playwright/" rel="tag">Playwright</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflection/" rel="tag">Reflection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/" rel="tag">System Design</a></li></ul>
     </div>
   </div>
 
@@ -546,7 +371,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CUHK-SZ/" style="font-size: 10px;">CUHK-SZ</a> <a href="/tags/Flask/" style="font-size: 20px;">Flask</a> <a href="/tags/Gemini/" style="font-size: 20px;">Gemini</a> <a href="/tags/Holistic-Assistant/" style="font-size: 20px;">Holistic Assistant</a> <a href="/tags/Information-Retrieval/" style="font-size: 10px;">Information Retrieval</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Prototype/" style="font-size: 10px;">Prototype</a> <a href="/tags/RAG/" style="font-size: 10px;">RAG</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a>
+      <a href="/tags/CUHK-SZ/" style="font-size: 10px;">CUHK-SZ</a> <a href="/tags/Flask/" style="font-size: 15px;">Flask</a> <a href="/tags/Gemini/" style="font-size: 15px;">Gemini</a> <a href="/tags/Holistic-Assistant/" style="font-size: 20px;">Holistic Assistant</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/RAG/" style="font-size: 15px;">RAG</a> <a href="/tags/Reflection/" style="font-size: 10px;">Reflection</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a>
     </div>
   </div>
 
@@ -555,7 +380,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/02/">February 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
     </div>
   </div>
 
@@ -568,15 +393,19 @@
       <ul>
         
           <li>
-            <a href="/2025/12/24/holistic-assistant-case-study/">Holistic Assistant: 一个面向 1500+ 学生的 RAG 学术顾问系统 — 从信息碎片化到结构化决策</a>
+            <a href="/2026/02/26/holistic-assistant-setback/">全人助手 ④：挫折 — Agent 时代，这个项目还有意义吗？</a>
           </li>
         
           <li>
-            <a href="/2025/11/20/holistic-assistant-mvp/">全人助手 MVP：从&#34;培养方案 PDF&#34;到 AI 驱动的学业规划（可行性验证）</a>
+            <a href="/2025/12/24/holistic-assistant-case-study/">全人助手 ③：v2 — 从 PDF 到 1568 门课程的 RAG 学业顾问系统</a>
           </li>
         
           <li>
-            <a href="/2025/10/02/hello-world/">第一次注册：全人助手已经在路上</a>
+            <a href="/2025/11/20/holistic-assistant-mvp/">全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/02/hello-world/">全人助手 ①：项目的起点</a>
           </li>
         
       </ul>
@@ -592,7 +421,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2025 JiaRUI Lou<br>
+      &copy; 2026 JiaRUI Lou<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

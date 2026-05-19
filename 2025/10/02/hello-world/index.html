@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>第一次注册：全人助手已经在路上 | JerryL&#39;s Journey of CS</title>
+  <title>全人助手 ①：项目的起点 | JerryL&#39;s Journey of CS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="这天是我第一次把博客搭起来、第一次把内容部署出去。   但其实在这之前，全人助手（Holistic Assistant） 已经在推进了：我想做一个面向 CUHK-SZ 学生的 AI 学术顾问系统，把”培养方案 PDF + SIS”里分散的课程信息变成可用的知识库，再接进 AI 问答与学习路线图。">
+  <meta name="description" content="今天把博客搭起来了，顺便记录一下正在做的项目。 我想做一个面向 CUHK-SZ 学生的 AI 学业助手——全人助手（Holistic Assistant）。简单说就是把培养方案 PDF 和 SIS 里零散的课程信息整合起来，接上 AI，让选课和学业规划不用再手动翻几十页文档。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一次注册：全人助手已经在路上">
+<meta property="og:title" content="全人助手 ①：项目的起点">
 <meta property="og:url" content="https://jerry0310no1.github.io/2025/10/02/hello-world/index.html">
 <meta property="og:site_name" content="JerryL&#39;s Journey of CS">
-<meta property="og:description" content="这天是我第一次把博客搭起来、第一次把内容部署出去。   但其实在这之前，全人助手（Holistic Assistant） 已经在推进了：我想做一个面向 CUHK-SZ 学生的 AI 学术顾问系统，把”培养方案 PDF + SIS”里分散的课程信息变成可用的知识库，再接进 AI 问答与学习路线图。">
+<meta property="og:description" content="今天把博客搭起来了，顺便记录一下正在做的项目。 我想做一个面向 CUHK-SZ 学生的 AI 学业助手——全人助手（Holistic Assistant）。简单说就是把培养方案 PDF 和 SIS 里零散的课程信息整合起来，接上 AI，让选课和学业规划不用再手动翻几十页文档。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-02T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-23T17:23:59.161Z">
+<meta property="article:modified_time" content="2026-05-19T06:24:11.157Z">
 <meta property="article:author" content="JiaRUI Lou">
 <meta property="article:tag" content="CUHK-SZ">
 <meta property="article:tag" content="Holistic Assistant">
@@ -88,7 +88,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Diary/">Diary</a>
+    <a class="article-category-link" href="/categories/Holistic-Assistant/">Holistic Assistant</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      第一次注册：全人助手已经在路上
+      全人助手 ①：项目的起点
     </h1>
   
 
@@ -107,38 +107,50 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>这天是我第一次把博客搭起来、第一次把内容部署出去。  </p>
-<p>但其实在这之前，<code>全人助手（Holistic Assistant）</code> 已经在推进了：我想做一个面向 CUHK-SZ 学生的 AI 学术顾问系统，把”培养方案 PDF + SIS”里分散的课程信息变成可用的知识库，再接进 AI 问答与学习路线图。</p>
+        <p>今天把博客搭起来了，顺便记录一下正在做的项目。</p>
+<p>我想做一个面向 CUHK-SZ 学生的 AI 学业助手——<code>全人助手（Holistic Assistant）</code>。简单说就是把培养方案 PDF 和 SIS 里零散的课程信息整合起来，接上 AI，让选课和学业规划不用再手动翻几十页文档。</p>
 <span id="more"></span>
 
-<p>目标是让它不只是个”搜索引擎”，而是能真正理解 CUHK-SZ 的课程体系、能给出贴合实际的学习建议、能帮学生在选课前就做好决策。</p>
-<p>这篇博客就当作起点：之后我会把项目从 <strong>v0</strong> 到 <strong>可用产品</strong> 的过程，按里程碑持续记录下来。</p>
+<p>目标不只是”能搜到课程信息”，而是能理解课程体系、给出实际可用的建议。</p>
+<p>接下来会按里程碑记录从零到可用产品的过程。</p>
 <hr>
-<h2 id="📚-技术准备"><a href="#📚-技术准备" class="headerlink" title="📚 技术准备"></a>📚 技术准备</h2><p>在启动这个项目前的几周，我开始系统性学习构建这个系统所需的技术栈：</p>
+<h2 id="💡-我的设想"><a href="#💡-我的设想" class="headerlink" title="💡 我的设想"></a>💡 我的设想</h2><p>做这个项目的核心想法其实很简单：<strong>把我自己踩过的坑变成 AI 的约束条件</strong>。</p>
+<p>纯靠 AI 回答学业问题，最大的问题是它太”随机”了——同一个问题问两次，可能给出完全不同的建议，而且很多建议脱离实际。但如果把我（以及其他学长学姐）真实的选课经历、学习节奏、踩过的坑作为”经验模板”注入给 AI，它就不再是凭空编答案，而是基于真实经验给出有方向性的建议。</p>
+<p>具体来说，我设想的优势是：</p>
 <ul>
-<li><strong>Flask</strong>：从官方 Quickstart 开始，学习 RESTful API 设计</li>
-<li><strong>Gemini API</strong>：阅读 Google AI 文档，了解如何调用生成式 AI</li>
-<li><strong>PDF 解析</strong>：研究 PyPDF2 和文本提取的常见问题</li>
-<li><strong>前端交互</strong>：学习 Tailwind CSS 和现代 JS（ES6+）</li>
+<li><strong>经验驱动的约束</strong>：用真实的学习经验（比如”CSC3100 建议在修完 CSC1002 之后再选”、”大二上不建议同时选三门理论课”）来约束 AI 的输出，让建议更贴合实际</li>
+<li><strong>信息整合</strong>：培养方案、SIS 开课信息、先修关系这些散落在不同地方的数据，整合到一个地方，问一句就能拿到完整的信息</li>
+<li><strong>规划而不只是查询</strong>：不只是回答”这门课几学分”，而是能根据专业、年级、已修课程，给出一个学期甚至整个大学的选课规划</li>
+</ul>
+<hr>
+<h2 id="🔮-未来想做的功能"><a href="#🔮-未来想做的功能" class="headerlink" title="🔮 未来想做的功能"></a>🔮 未来想做的功能</h2><p>现在还只是刚起步，但有一些比较明确的想法：</p>
+<ul>
+<li><strong>可视化课程路线图</strong>：把培养方案做成可交互的图谱，点一门课就能看到它的先修、后续课程、开课学期</li>
+<li><strong>学期模拟器</strong>：选好想上的课，自动检测时间冲突、算总学分、评估压力</li>
+<li><strong>个性化推荐</strong>：根据你的专业方向和已修课程，推荐下学期最合适的选课组合</li>
+<li><strong>课程对比</strong>：想在两门选修之间做选择时，能并排看到两门课的详细信息和开课历史</li>
+<li><strong>移动端适配</strong>：让在手机上也能方便使用</li>
+</ul>
+<p>当然这些都是设想，能做到多少取决于时间和精力。先把核心的”AI + 培养方案”跑通再说。</p>
+<hr>
+<h2 id="📚-前期准备"><a href="#📚-前期准备" class="headerlink" title="📚 前期准备"></a>📚 前期准备</h2><p>开始之前花了几周学了需要的技术栈：</p>
+<ul>
+<li><strong>Flask</strong>：用来写后端 API</li>
+<li><strong>Gemini API</strong>：Google 的生成式 AI，拿来做问答</li>
+<li><strong>PyPDF2</strong>：解析培养方案 PDF</li>
+<li><strong>前端</strong>：Tailwind CSS + 原生 JS</li>
 </ul>
 <hr>
 <h2 id="🙏-致谢"><a href="#🙏-致谢" class="headerlink" title="🙏 致谢"></a>🙏 致谢</h2><ul>
-<li><strong>严明教授</strong>和<strong>贾建民教授</strong>：在项目早期给予了宝贵的建议和支持</li>
 <li><strong>团队成员</strong>：感谢几位同组成员在初期帮助采集培养方案 PDF 等基础数据</li>
 </ul>
 <hr>
-<h2 id="Quick-Start（给未来的自己）"><a href="#Quick-Start（给未来的自己）" class="headerlink" title="Quick Start（给未来的自己）"></a>Quick Start（给未来的自己）</h2><h3 id="创建新文章"><a href="#创建新文章" class="headerlink" title="创建新文章"></a>创建新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<h3 id="部署到远程"><a href="#部署到远程" class="headerlink" title="部署到远程"></a>部署到远程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p><em>Contact: <a href="mailto:&#x31;&#x32;&#53;&#x30;&#x39;&#48;&#x34;&#x34;&#53;&#x40;&#x6c;&#105;&#110;&#x6b;&#x2e;&#99;&#117;&#x68;&#107;&#46;&#101;&#100;&#x75;&#46;&#99;&#110;">125090445@link.cuhk.edu.cn</a></em></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jerry0310no1.github.io/2025/10/02/hello-world/" data-id="cuidcMu7F1xYu2Kg65LaovofS" data-title="第一次注册：全人助手已经在路上" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://jerry0310no1.github.io/2025/10/02/hello-world/" data-id="cuidN-gso8LOzpS8Gn-0e0fYY" data-title="全人助手 ①：项目的起点" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -154,7 +166,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          全人助手 MVP：从&#34;培养方案 PDF&#34;到 AI 驱动的学业规划（可行性验证）
+          全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划
         
       </div>
     </a>
@@ -174,7 +186,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Projects/">Projects</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical-Case-Study/">Technical Case Study</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Holistic-Assistant/">Holistic Assistant</a></li></ul>
     </div>
   </div>
 
@@ -184,7 +196,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUHK-SZ/" rel="tag">CUHK-SZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Information-Retrieval/" rel="tag">Information Retrieval</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Playwright/" rel="tag">Playwright</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prototype/" rel="tag">Prototype</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/" rel="tag">System Design</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUHK-SZ/" rel="tag">CUHK-SZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Playwright/" rel="tag">Playwright</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflection/" rel="tag">Reflection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/" rel="tag">System Design</a></li></ul>
     </div>
   </div>
 
@@ -194,7 +206,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CUHK-SZ/" style="font-size: 10px;">CUHK-SZ</a> <a href="/tags/Flask/" style="font-size: 20px;">Flask</a> <a href="/tags/Gemini/" style="font-size: 20px;">Gemini</a> <a href="/tags/Holistic-Assistant/" style="font-size: 20px;">Holistic Assistant</a> <a href="/tags/Information-Retrieval/" style="font-size: 10px;">Information Retrieval</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Prototype/" style="font-size: 10px;">Prototype</a> <a href="/tags/RAG/" style="font-size: 10px;">RAG</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a>
+      <a href="/tags/CUHK-SZ/" style="font-size: 10px;">CUHK-SZ</a> <a href="/tags/Flask/" style="font-size: 15px;">Flask</a> <a href="/tags/Gemini/" style="font-size: 15px;">Gemini</a> <a href="/tags/Holistic-Assistant/" style="font-size: 20px;">Holistic Assistant</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/RAG/" style="font-size: 15px;">RAG</a> <a href="/tags/Reflection/" style="font-size: 10px;">Reflection</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a>
     </div>
   </div>
 
@@ -203,7 +215,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/02/">February 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
     </div>
   </div>
 
@@ -216,15 +228,19 @@
       <ul>
         
           <li>
-            <a href="/2025/12/24/holistic-assistant-case-study/">Holistic Assistant: 一个面向 1500+ 学生的 RAG 学术顾问系统 — 从信息碎片化到结构化决策</a>
+            <a href="/2026/02/26/holistic-assistant-setback/">全人助手 ④：挫折 — Agent 时代，这个项目还有意义吗？</a>
           </li>
         
           <li>
-            <a href="/2025/11/20/holistic-assistant-mvp/">全人助手 MVP：从&#34;培养方案 PDF&#34;到 AI 驱动的学业规划（可行性验证）</a>
+            <a href="/2025/12/24/holistic-assistant-case-study/">全人助手 ③：v2 — 从 PDF 到 1568 门课程的 RAG 学业顾问系统</a>
           </li>
         
           <li>
-            <a href="/2025/10/02/hello-world/">第一次注册：全人助手已经在路上</a>
+            <a href="/2025/11/20/holistic-assistant-mvp/">全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/02/hello-world/">全人助手 ①：项目的起点</a>
           </li>
         
       </ul>
@@ -240,7 +256,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2025 JiaRUI Lou<br>
+      &copy; 2026 JiaRUI Lou<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

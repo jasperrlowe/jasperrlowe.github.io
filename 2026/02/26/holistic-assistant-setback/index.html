@@ -4,16 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>JerryL&#39;s Journey of CS</title>
+  <title>全人助手 ④：挫折 — Agent 时代，这个项目还有意义吗？ | JerryL&#39;s Journey of CS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Project Developing Map of Holistic Development Assistant,and other CS learning or MATH study">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JerryL&#39;s Journey of CS">
-<meta property="og:url" content="https://jerry0310no1.github.io/index.html">
+  <meta name="description" content="最近有点丧。 这几个月 AI Agent 和 Skill 的发展速度太快了——Gemini、Claude 这些模型已经能通过工具调用直接访问网页、读文件、执行代码。各种 MCP 协议、Agent Framework 层出不穷，感觉只要写一个 skill 接进去，AI 就能自己去 SIS 查课、读培养方案、帮你排课表。 那我花了几个月做的全人助手，是不是其实不如直接写成一个 skill，接进现成的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全人助手 ④：挫折 — Agent 时代，这个项目还有意义吗？">
+<meta property="og:url" content="https://jerry0310no1.github.io/2026/02/26/holistic-assistant-setback/index.html">
 <meta property="og:site_name" content="JerryL&#39;s Journey of CS">
-<meta property="og:description" content="Project Developing Map of Holistic Development Assistant,and other CS learning or MATH study">
+<meta property="og:description" content="最近有点丧。 这几个月 AI Agent 和 Skill 的发展速度太快了——Gemini、Claude 这些模型已经能通过工具调用直接访问网页、读文件、执行代码。各种 MCP 协议、Agent Framework 层出不穷，感觉只要写一个 skill 接进去，AI 就能自己去 SIS 查课、读培养方案、帮你排课表。 那我花了几个月做的全人助手，是不是其实不如直接写成一个 skill，接进现成的">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-26T14:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-19T06:24:19.237Z">
 <meta property="article:author" content="JiaRUI Lou">
+<meta property="article:tag" content="Holistic Assistant">
+<meta property="article:tag" content="RAG">
+<meta property="article:tag" content="Reflection">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="JerryL's Journey of CS" type="application/atom+xml">
@@ -77,9 +82,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-holistic-assistant-setback" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-holistic-assistant-setback" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/02/26/holistic-assistant-setback/" class="article-date">
   <time class="dt-published" datetime="2026-02-26T14:00:00.000Z" itemprop="datePublished">2026-02-26</time>
@@ -96,8 +99,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/02/26/holistic-assistant-setback/">全人助手 ④：挫折 — Agent 时代，这个项目还有意义吗？</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      全人助手 ④：挫折 — Agent 时代，这个项目还有意义吗？
     </h1>
   
 
@@ -108,11 +111,45 @@
         <p>最近有点丧。</p>
 <p>这几个月 AI Agent 和 Skill 的发展速度太快了——Gemini、Claude 这些模型已经能通过工具调用直接访问网页、读文件、执行代码。各种 MCP 协议、Agent Framework 层出不穷，感觉只要写一个 skill 接进去，AI 就能自己去 SIS 查课、读培养方案、帮你排课表。</p>
 <p>那我花了几个月做的全人助手，是不是其实不如直接写成一个 skill，接进现成的 Agent 框架里就行了？</p>
-        
-          <p class="article-more-link">
-            <a href="/2026/02/26/holistic-assistant-setback/#more">Read More</a>
-          </p>
-        
+<span id="more"></span>
+
+<hr>
+<h2 id="😔-被”新技术”冲击的感觉"><a href="#😔-被”新技术”冲击的感觉" class="headerlink" title="😔 被”新技术”冲击的感觉"></a>😔 被”新技术”冲击的感觉</h2><p>说实话，第一次看到有人用 Agent + Skill 几行配置就搞定了一个类似功能的 demo，心里挺不是滋味的。我辛辛苦苦写爬虫、搞 PDF 解析、调 prompt、做前端，人家可能一个下午就能搭出差不多的东西。</p>
+<p>而且从架构上看，Agent 的做法确实更”优雅”：</p>
+<ul>
+<li>不需要预先爬取和存储数据，Agent 实时去查就行</li>
+<li>不需要维护知识库，模型自己决定什么时候查什么数据</li>
+<li>不需要做上下文管理，Agent 框架帮你处理</li>
+</ul>
+<p>这让我一度觉得自己的 RAG 方案是在”用旧方法解决新问题”。</p>
+<hr>
+<h2 id="😵-RAG-本身的困境：离散-vs-连续"><a href="#😵-RAG-本身的困境：离散-vs-连续" class="headerlink" title="😵 RAG 本身的困境：离散 vs. 连续"></a>😵 RAG 本身的困境：离散 vs. 连续</h2><p>除了被 Agent 冲击之外，RAG 本身的问题也一直困扰着我。</p>
+<p>核心矛盾在于：<strong>SIS 的数据是离散的，PDF 的数据是连续的，但 AI 需要把它们当成统一的知识来理解。</strong></p>
+<p>SIS 里的课程信息天然是结构化的碎片——每门课是一条独立记录，有课程代号、学分、开课时间、老师，彼此之间没有叙述上的连贯性。你可以精确地查到 CSC3100 在 2025-26 第一学期开了 3 个 section，但这些信息是”离散的点”。</p>
+<p>而培养方案 PDF 恰好相反——它是连续的叙述：从大一到大四的课程安排有逻辑顺序、有先修依赖、有模块分组，课程之间有上下文关系。但 PDF 一旦被提取成文本，这些结构关系就很容易丢失。</p>
+<p>问题就在这里：<strong>AI 擅长理解连续文本，但对离散碎片的整合能力有限。</strong> 你喂给它一堆 JSON 格式的课程数据，它能读懂每条记录，但很难自动理解”CSC1001 → CSC1002 → CSC3100”这条依赖链——因为这个关系存在于 PDF 的连续叙述中，而不是 SIS 的离散字段里。</p>
+<p>反过来，如果你把整个 PDF 喂给它，它能理解课程体系的全貌，但又会在具体细节上犯错（比如分不清 STA2001 和 STA2001H）。</p>
+<p>这种”离散”和”连续”的张力，是我目前 RAG 方案最大的瓶颈。</p>
+<hr>
+<h2 id="💪-但是，这个项目的价值还在"><a href="#💪-但是，这个项目的价值还在" class="headerlink" title="💪 但是，这个项目的价值还在"></a>💪 但是，这个项目的价值还在</h2><p>想了很久之后，我觉得这个项目还是有做下去的意义。原因很简单：</p>
+<p><strong>全人助手里的数据，是网上搜不到的。</strong></p>
+<p>你去 Google 搜”CUHK-SZ CSC3100 先修要求”，大概率搜不到准确结果。SIS 是校内系统、需要登录才能访问，培养方案 PDF 散落在各学院官网的角落里，而且每年都在更新。这些信息不在任何公开知识库里，ChatGPT 和 Gemini 的训练数据里也没有。</p>
+<p>就算 Agent 技术再成熟，它也需要有人告诉它”去哪里找数据、怎么登录 SIS、怎么理解这份 PDF 的结构”。而这正是我这几个月做的事情——<strong>把这些分散的、私有的、非标准化的数据变成可用的知识库</strong>。</p>
+<p>Agent 是工具，但知识库是资产。工具可以被替代，资产不容易被替代。</p>
+<hr>
+<h2 id="🔭-接下来怎么办"><a href="#🔭-接下来怎么办" class="headerlink" title="🔭 接下来怎么办"></a>🔭 接下来怎么办</h2><p>与其纠结”要不要重写成 Agent skill”，不如把精力放在这个项目真正有壁垒的地方：<strong>数据质量和个性化算法</strong>。</p>
+<p>接下来想重点做的事情：</p>
+<ul>
+<li><strong>个性化推荐算法</strong>：不只是”查课程信息”，而是根据学生的专业、年级、已修课程、GPA 等，给出真正个性化的选课建议。这不是通用 Agent 能做到的，因为它需要对 CUHK-SZ 培养方案的深度理解</li>
+<li><strong>课程关系图谱</strong>：把 PDF 里隐含的先修依赖、模块归属关系抽取出来，建成结构化的图谱，解决”离散 vs. 连续”的问题</li>
+<li><strong>历史数据积累</strong>：持续爬取多学期的 SIS 数据，积累开课规律（比如”这门课每年只在 Fall 开”），这些是实时查询拿不到的</li>
+<li><strong>用户反馈闭环</strong>：让用户标记”这个建议有没有用”，逐步优化推荐的准确度</li>
+</ul>
+<p>技术栈可以变、架构可以改，但只要数据和算法是独有的，这个项目就有存在的价值。</p>
+<hr>
+<p>虽然现在有点迷茫，但也不至于放弃。先把能做的做好，边做边想。</p>
+<p><em>Contact: <a href="mailto:&#49;&#50;&#x35;&#x30;&#x39;&#x30;&#x34;&#52;&#53;&#64;&#108;&#x69;&#x6e;&#107;&#46;&#99;&#117;&#x68;&#107;&#x2e;&#101;&#x64;&#117;&#x2e;&#99;&#x6e;">125090445@link.cuhk.edu.cn</a></em></p>
+
       
     </div>
     <footer class="article-footer">
@@ -125,159 +162,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-holistic-assistant-case-study" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/12/24/holistic-assistant-case-study/" class="article-date">
-  <time class="dt-published" datetime="2025-12-24T06:00:00.000Z" itemprop="datePublished">2025-12-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Holistic-Assistant/">Holistic Assistant</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/12/24/holistic-assistant-case-study/">全人助手 ③：v2 — 从 PDF 到 1568 门课程的 RAG 学业顾问系统</a>
-    </h1>
+    <a href="/2025/12/24/holistic-assistant-case-study/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">全人助手 ③：v2 — 从 PDF 到 1568 门课程的 RAG 学业顾问系统</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>TL;DR</strong>: 在 MVP 的基础上，把系统从”只能读 PDF”升级成了完整的学业顾问：加了 SIS 爬虫（1568 门课 × 3 学期），用 Gemini 做 PDF 去噪，按学期分片存储来管理上下文。核心挑战：PDF 数据提取的噪声过滤、SIS 反爬、上下文窗口管理。</p>
-        
-          <p class="article-more-link">
-            <a href="/2025/12/24/holistic-assistant-case-study/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jerry0310no1.github.io/2025/12/24/holistic-assistant-case-study/" data-id="cuidQMBmZsznxxWQ3Ldi8QHYN" data-title="全人助手 ③：v2 — 从 PDF 到 1568 门课程的 RAG 学业顾问系统" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Playwright/" rel="tag">Playwright</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RAG/" rel="tag">RAG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System-Design/" rel="tag">System Design</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-holistic-assistant-mvp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/11/20/holistic-assistant-mvp/" class="article-date">
-  <time class="dt-published" datetime="2025-11-20T04:00:00.000Z" itemprop="datePublished">2025-11-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Holistic-Assistant/">Holistic Assistant</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/11/20/holistic-assistant-mvp/">全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>TL;DR</strong>: 花了 3 周做出”全人助手”的第一个可用版本，验证了用 AI 整合培养方案 PDF 来做学业规划这件事是可行的。227 行 Flask 后端 + 1189 行原生 JS 前端，支持 36 个专业的课程查询。</p>
-        
-          <p class="article-more-link">
-            <a href="/2025/11/20/holistic-assistant-mvp/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jerry0310no1.github.io/2025/11/20/holistic-assistant-mvp/" data-id="cuidAG3SxN3IUHxCw09cE1QqV" data-title="全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/02/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-10-02T02:00:00.000Z" itemprop="datePublished">2025-10-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Holistic-Assistant/">Holistic Assistant</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/02/hello-world/">全人助手 ①：项目的起点</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>今天把博客搭起来了，顺便记录一下正在做的项目。</p>
-<p>我想做一个面向 CUHK-SZ 学生的 AI 学业助手——<code>全人助手（Holistic Assistant）</code>。简单说就是把培养方案 PDF 和 SIS 里零散的课程信息整合起来，接上 AI，让选课和学业规划不用再手动翻几十页文档。</p>
-        
-          <p class="article-more-link">
-            <a href="/2025/10/02/hello-world/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jerry0310no1.github.io/2025/10/02/hello-world/" data-id="cuidN-gso8LOzpS8Gn-0e0fYY" data-title="全人助手 ①：项目的起点" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CUHK-SZ/" rel="tag">CUHK-SZ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
