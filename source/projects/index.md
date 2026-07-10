@@ -277,7 +277,7 @@ Welcome to my project showcase! Here you'll find the technical systems I've buil
     <a href="/2025/11/20/holistic-assistant-mvp/" class="project-btn btn-secondary">
       🔬 MVP Report
     </a>
-    <a href="https://github.com/Jerry0310no1/holistic-assistant" class="project-btn btn-secondary" target="_blank">
+    <a href="https://github.com/jasperrlowe/holistic-assistant" class="project-btn btn-secondary" target="_blank">
       💻 View Code
     </a>
   </div>
@@ -308,5 +308,5 @@ Welcome to my project showcase! Here you'll find the technical systems I've buil
 Interested in collaborating or discussing technical ideas?
 
 **Email:** [125090445@link.cuhk.edu.cn](mailto:125090445@link.cuhk.edu.cn)
-**GitHub:** [@Jerry0310no1](https://github.com/Jerry0310no1)
-**Blog:** [jerry0310no1.github.io](https://jerry0310no1.github.io)
+**GitHub:** [@jasperrlowe](https://github.com/jasperrlowe)
+**Blog:** [jasperrlowe.github.io](https://jasperrlowe.github.io)

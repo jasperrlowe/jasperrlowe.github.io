@@ -1027,5 +1027,5 @@ def _mp_runner(prompt: str, pipe):
 
 ---
 
-*GitHub Repo (Private): [holistic-assistant](https://github.com/Jerry0310no1/holistic-assistant)*
+*GitHub Repo (Private): [holistic-assistant](https://github.com/jasperrlowe/holistic-assistant)*
 *Contact: [125090445@link.cuhk.edu.cn](mailto:125090445@link.cuhk.edu.cn)*
