@@ -13,8 +13,8 @@
 <meta property="og:site_name" content="JerryL&#39;s Journey of CS">
 <meta property="og:description" content="最近有点丧。 这几个月 AI Agent 和 Skill 的发展速度太快了——Gemini、Claude 这些模型已经能通过工具调用直接访问网页、读文件、执行代码。各种 MCP 协议、Agent Framework 层出不穷，感觉只要写一个 skill 接进去，AI 就能自己去 SIS 查课、读培养方案、帮你排课表。 那我花了几个月做的全人助手，是不是其实不如直接写成一个 skill，接进现成的">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-02-26T14:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-19T06:24:19.237Z">
+<meta property="article:published_time" content="2026-02-26T22:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-10T02:03:10.167Z">
 <meta property="article:author" content="JiaRUI Lou">
 <meta property="article:tag" content="Holistic Assistant">
 <meta property="article:tag" content="RAG">
@@ -85,7 +85,7 @@
         <section id="main"><article id="post-holistic-assistant-setback" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/02/26/holistic-assistant-setback/" class="article-date">
-  <time class="dt-published" datetime="2026-02-26T14:00:00.000Z" itemprop="datePublished">2026-02-26</time>
+  <time class="dt-published" datetime="2026-02-26T22:00:00.000Z" itemprop="datePublished">2026-02-26</time>
 </a>
     
   <div class="article-category">
@@ -112,9 +112,8 @@
 <p>这几个月 AI Agent 和 Skill 的发展速度太快了——Gemini、Claude 这些模型已经能通过工具调用直接访问网页、读文件、执行代码。各种 MCP 协议、Agent Framework 层出不穷，感觉只要写一个 skill 接进去，AI 就能自己去 SIS 查课、读培养方案、帮你排课表。</p>
 <p>那我花了几个月做的全人助手，是不是其实不如直接写成一个 skill，接进现成的 Agent 框架里就行了？</p>
 <span id="more"></span>
-
-<hr>
-<h2 id="😔-被”新技术”冲击的感觉"><a href="#😔-被”新技术”冲击的感觉" class="headerlink" title="😔 被”新技术”冲击的感觉"></a>😔 被”新技术”冲击的感觉</h2><p>说实话，第一次看到有人用 Agent + Skill 几行配置就搞定了一个类似功能的 demo，心里挺不是滋味的。我辛辛苦苦写爬虫、搞 PDF 解析、调 prompt、做前端，人家可能一个下午就能搭出差不多的东西。</p>
+<hr/>
+<h2 id="😔-被”新技术”冲击的感觉"><a class="headerlink" href="#😔-被”新技术”冲击的感觉" title="😔 被”新技术”冲击的感觉"></a>😔 被”新技术”冲击的感觉</h2><p>说实话，第一次看到有人用 Agent + Skill 几行配置就搞定了一个类似功能的 demo，心里挺不是滋味的。我辛辛苦苦写爬虫、搞 PDF 解析、调 prompt、做前端，人家可能一个下午就能搭出差不多的东西。</p>
 <p>而且从架构上看，Agent 的做法确实更”优雅”：</p>
 <ul>
 <li>不需要预先爬取和存储数据，Agent 实时去查就行</li>
@@ -122,22 +121,22 @@
 <li>不需要做上下文管理，Agent 框架帮你处理</li>
 </ul>
 <p>这让我一度觉得自己的 RAG 方案是在”用旧方法解决新问题”。</p>
-<hr>
-<h2 id="😵-RAG-本身的困境：离散-vs-连续"><a href="#😵-RAG-本身的困境：离散-vs-连续" class="headerlink" title="😵 RAG 本身的困境：离散 vs. 连续"></a>😵 RAG 本身的困境：离散 vs. 连续</h2><p>除了被 Agent 冲击之外，RAG 本身的问题也一直困扰着我。</p>
+<hr/>
+<h2 id="😵-RAG-本身的困境：离散-vs-连续"><a class="headerlink" href="#😵-RAG-本身的困境：离散-vs-连续" title="😵 RAG 本身的困境：离散 vs. 连续"></a>😵 RAG 本身的困境：离散 vs. 连续</h2><p>除了被 Agent 冲击之外，RAG 本身的问题也一直困扰着我。</p>
 <p>核心矛盾在于：<strong>SIS 的数据是离散的，PDF 的数据是连续的，但 AI 需要把它们当成统一的知识来理解。</strong></p>
 <p>SIS 里的课程信息天然是结构化的碎片——每门课是一条独立记录，有课程代号、学分、开课时间、老师，彼此之间没有叙述上的连贯性。你可以精确地查到 CSC3100 在 2025-26 第一学期开了 3 个 section，但这些信息是”离散的点”。</p>
 <p>而培养方案 PDF 恰好相反——它是连续的叙述：从大一到大四的课程安排有逻辑顺序、有先修依赖、有模块分组，课程之间有上下文关系。但 PDF 一旦被提取成文本，这些结构关系就很容易丢失。</p>
 <p>问题就在这里：<strong>AI 擅长理解连续文本，但对离散碎片的整合能力有限。</strong> 你喂给它一堆 JSON 格式的课程数据，它能读懂每条记录，但很难自动理解”CSC1001 → CSC1002 → CSC3100”这条依赖链——因为这个关系存在于 PDF 的连续叙述中，而不是 SIS 的离散字段里。</p>
 <p>反过来，如果你把整个 PDF 喂给它，它能理解课程体系的全貌，但又会在具体细节上犯错（比如分不清 STA2001 和 STA2001H）。</p>
 <p>这种”离散”和”连续”的张力，是我目前 RAG 方案最大的瓶颈。</p>
-<hr>
-<h2 id="💪-但是，这个项目的价值还在"><a href="#💪-但是，这个项目的价值还在" class="headerlink" title="💪 但是，这个项目的价值还在"></a>💪 但是，这个项目的价值还在</h2><p>想了很久之后，我觉得这个项目还是有做下去的意义。原因很简单：</p>
+<hr/>
+<h2 id="💪-但是，这个项目的价值还在"><a class="headerlink" href="#💪-但是，这个项目的价值还在" title="💪 但是，这个项目的价值还在"></a>💪 但是，这个项目的价值还在</h2><p>想了很久之后，我觉得这个项目还是有做下去的意义。原因很简单：</p>
 <p><strong>全人助手里的数据，是网上搜不到的。</strong></p>
 <p>你去 Google 搜”CUHK-SZ CSC3100 先修要求”，大概率搜不到准确结果。SIS 是校内系统、需要登录才能访问，培养方案 PDF 散落在各学院官网的角落里，而且每年都在更新。这些信息不在任何公开知识库里，ChatGPT 和 Gemini 的训练数据里也没有。</p>
 <p>就算 Agent 技术再成熟，它也需要有人告诉它”去哪里找数据、怎么登录 SIS、怎么理解这份 PDF 的结构”。而这正是我这几个月做的事情——<strong>把这些分散的、私有的、非标准化的数据变成可用的知识库</strong>。</p>
 <p>Agent 是工具，但知识库是资产。工具可以被替代，资产不容易被替代。</p>
-<hr>
-<h2 id="🔭-接下来怎么办"><a href="#🔭-接下来怎么办" class="headerlink" title="🔭 接下来怎么办"></a>🔭 接下来怎么办</h2><p>与其纠结”要不要重写成 Agent skill”，不如把精力放在这个项目真正有壁垒的地方：<strong>数据质量和个性化算法</strong>。</p>
+<hr/>
+<h2 id="🔭-接下来怎么办"><a class="headerlink" href="#🔭-接下来怎么办" title="🔭 接下来怎么办"></a>🔭 接下来怎么办</h2><p>与其纠结”要不要重写成 Agent skill”，不如把精力放在这个项目真正有壁垒的地方：<strong>数据质量和个性化算法</strong>。</p>
 <p>接下来想重点做的事情：</p>
 <ul>
 <li><strong>个性化推荐算法</strong>：不只是”查课程信息”，而是根据学生的专业、年级、已修课程、GPA 等，给出真正个性化的选课建议。这不是通用 Agent 能做到的，因为它需要对 CUHK-SZ 培养方案的深度理解</li>
@@ -146,14 +145,15 @@
 <li><strong>用户反馈闭环</strong>：让用户标记”这个建议有没有用”，逐步优化推荐的准确度</li>
 </ul>
 <p>技术栈可以变、架构可以改，但只要数据和算法是独有的，这个项目就有存在的价值。</p>
-<hr>
+<hr/>
 <p>虽然现在有点迷茫，但也不至于放弃。先把能做的做好，边做边想。</p>
-<p><em>Contact: <a href="mailto:&#49;&#50;&#x35;&#x30;&#x39;&#x30;&#x34;&#52;&#53;&#64;&#108;&#x69;&#x6e;&#107;&#46;&#99;&#117;&#x68;&#107;&#x2e;&#101;&#x64;&#117;&#x2e;&#99;&#x6e;">125090445@link.cuhk.edu.cn</a></em></p>
+<p><em>Contact: <a href="mailto:125090445@link.cuhk.edu.cn">125090445@link.cuhk.edu.cn</a></em></p>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jasperrlowe.github.io/2026/02/26/holistic-assistant-setback/" data-id="cuid5clA0dIl4Vmd5NgGPEr6F" data-title="全人助手 ④：挫折 — Agent 时代，这个项目还有意义吗？" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://jasperrlowe.github.io/2026/02/26/holistic-assistant-setback/" data-id="cuidbBy60-TgCK0qhClPwYzAf" data-title="全人助手 ④：挫折 — Agent 时代，这个项目还有意义吗？" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -168,7 +168,7 @@
   
     <a href="/2025/12/24/holistic-assistant-case-study/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">全人助手 ③：v2 — 从 PDF 到 1568 门课程的 RAG 学业顾问系统</div>
+      <div class="article-nav-title">Holistic Assistant: 一个面向 1500+ 学生的 RAG 学术顾问系统 — 从信息碎片化到结构化决策</div>
     </a>
   
 </nav>
@@ -185,7 +185,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Holistic-Assistant/">Holistic Assistant</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Holistic-Assistant/">Holistic Assistant</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Projects/">Projects</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Technical-Case-Study/">Technical Case Study</a></li></ul>
     </div>
   </div>
 
@@ -195,7 +195,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUHK-SZ/" rel="tag">CUHK-SZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Playwright/" rel="tag">Playwright</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflection/" rel="tag">Reflection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/" rel="tag">System Design</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUHK-SZ/" rel="tag">CUHK-SZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gemini/" rel="tag">Gemini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Holistic-Assistant/" rel="tag">Holistic Assistant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Information-Retrieval/" rel="tag">Information Retrieval</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Playwright/" rel="tag">Playwright</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prototype/" rel="tag">Prototype</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reflection/" rel="tag">Reflection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/" rel="tag">System Design</a></li></ul>
     </div>
   </div>
 
@@ -205,7 +205,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CUHK-SZ/" style="font-size: 10px;">CUHK-SZ</a> <a href="/tags/Flask/" style="font-size: 15px;">Flask</a> <a href="/tags/Gemini/" style="font-size: 15px;">Gemini</a> <a href="/tags/Holistic-Assistant/" style="font-size: 20px;">Holistic Assistant</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/RAG/" style="font-size: 15px;">RAG</a> <a href="/tags/Reflection/" style="font-size: 10px;">Reflection</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a>
+      <a href="/tags/CUHK-SZ/" style="font-size: 10px;">CUHK-SZ</a> <a href="/tags/Flask/" style="font-size: 15px;">Flask</a> <a href="/tags/Gemini/" style="font-size: 15px;">Gemini</a> <a href="/tags/Holistic-Assistant/" style="font-size: 20px;">Holistic Assistant</a> <a href="/tags/Information-Retrieval/" style="font-size: 10px;">Information Retrieval</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Prototype/" style="font-size: 10px;">Prototype</a> <a href="/tags/RAG/" style="font-size: 15px;">RAG</a> <a href="/tags/Reflection/" style="font-size: 10px;">Reflection</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a>
     </div>
   </div>
 
@@ -231,15 +231,15 @@
           </li>
         
           <li>
-            <a href="/2025/12/24/holistic-assistant-case-study/">全人助手 ③：v2 — 从 PDF 到 1568 门课程的 RAG 学业顾问系统</a>
+            <a href="/2025/12/24/holistic-assistant-case-study/">Holistic Assistant: 一个面向 1500+ 学生的 RAG 学术顾问系统 — 从信息碎片化到结构化决策</a>
           </li>
         
           <li>
-            <a href="/2025/11/20/holistic-assistant-mvp/">全人助手 ②：MVP — 用 AI 整合培养方案 PDF 做学业规划</a>
+            <a href="/2025/11/20/holistic-assistant-mvp/">全人助手 MVP：从&#34;培养方案 PDF&#34;到 AI 驱动的学业规划（可行性验证）</a>
           </li>
         
           <li>
-            <a href="/2025/10/02/hello-world/">全人助手 ①：项目的起点</a>
+            <a href="/2025/10/02/hello-world/">第一次注册：全人助手已经在路上</a>
           </li>
         
       </ul>
